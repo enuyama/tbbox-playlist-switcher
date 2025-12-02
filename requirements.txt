@@ -1,0 +1,12 @@
+# GPIO制御（Raspberry Pi用）
+RPi.GPIO==0.7.1
+
+# 環境変数管理
+python-dotenv==1.0.0
+
+# 設定値バリデーション
+pydantic==2.5.0
+
+# テスト関連
+pytest==7.4.3
+pytest-cov==4.1.0

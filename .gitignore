@@ -1,0 +1,42 @@
+# PDFファイル（プロトコル仕様書を除く）
+*.pdf
+!TB\ series\ central\ control\ protocol-V1.0.0.pdf
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 仮想環境
+.env*
+.venv
+venv/
+env/
+ENV/
+
+# テスト・カバレッジ
+.pytest_cache
+.coverage
+.coverage.*
+.coverage.xml
+.coverage.json
+.coverage.yaml
+.coverage.yml
+.coverage.html
+htmlcov/
+
+# ログファイル
+*.log
+logs/
+
+# IDEファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
