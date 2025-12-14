@@ -1,4 +1,4 @@
 """マッピングモジュール"""
-from .gpio_mapper import GPIOMapper
+from .switch_mapper import SwitchMapper
 
-__all__ = ["GPIOMapper"]
+__all__ = ["SwitchMapper"]
