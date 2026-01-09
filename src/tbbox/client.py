@@ -133,30 +133,32 @@ class TBBOXClient:
             self.socket.send(command_bytes)
             logger.debug(f"コマンド送信: {hex_command}")
 
-            # レスポンスを受信（オプション）
+            # レスポンスを受信（必須）
             try:
                 response = self.socket.recv(1024)
                 if response:
                     response_hex = binascii.hexlify(response).decode()
                     logger.debug(f"レスポンス受信: {response_hex}")
+                    return True  # レスポンス受信成功
+                else:
+                    logger.warning("レスポンスが空です")
+                    return False
             except socket.timeout:
-                # タイムアウトは正常（レスポンスがない場合がある）
-                pass
-
-            return True
+                logger.warning("レスポンス受信タイムアウト")
+                return False
 
         except Exception as e:
             logger.error(f"コマンド送信中にエラーが発生しました: {e}")
             self.is_connected = False
             return False
 
-    def send_command(self, hex_command: str, max_retry: int = 3) -> bool:
+    def send_command(self, hex_command: str, max_retry: int = 5) -> bool:
         """
         コマンドを送信（再送信機能付き）
 
         Args:
             hex_command: 16進数形式のコマンド文字列
-            max_retry: 最大再送信回数
+            max_retry: 最大再送信回数（デフォルト: 5回）
 
         Returns:
             bool: 送信成功時True、失敗時False
@@ -177,7 +179,7 @@ class TBBOXClient:
 
             retry_count += 1
             if retry_count < max_retry:
-                logger.warning(f"コマンド送信失敗。再送信します (試行 {retry_count + 1}/{max_retry})")
+                logger.warning(f"コマンド送信失敗。1秒後に再送信します (試行 {retry_count + 1}/{max_retry})")
                 time.sleep(1)
 
         logger.error(f"コマンド送信に失敗しました ({max_retry}回試行)")
