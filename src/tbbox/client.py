@@ -131,13 +131,14 @@ class TBBOXClient:
 
             # コマンド送信
             self.socket.send(command_bytes)
-            logger.debug(f"コマンド送信: {hex_command[:50]}...")
+            logger.debug(f"コマンド送信: {hex_command}")
 
             # レスポンスを受信（オプション）
             try:
                 response = self.socket.recv(1024)
                 if response:
-                    logger.debug(f"レスポンス受信: {binascii.hexlify(response).decode()[:50]}...")
+                    response_hex = binascii.hexlify(response).decode()
+                    logger.debug(f"レスポンス受信: {response_hex}")
             except socket.timeout:
                 # タイムアウトは正常（レスポンスがない場合がある）
                 pass
