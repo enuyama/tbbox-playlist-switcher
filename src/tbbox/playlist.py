@@ -76,8 +76,8 @@ class PlaylistController:
                 logger.info(f"プログラム '{program_id}' への切り替えが完了しました")
 
                 # プログラム切り替え後、音量を0%に設定
-                logger.info("音量を0%に設定します")
-                self.set_volume(0)
+                # logger.info("音量を0%に設定します")
+                # self.set_volume(0)
 
                 return True
             else:
