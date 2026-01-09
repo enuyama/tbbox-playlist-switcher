@@ -5,6 +5,7 @@
 import logging
 import sys
 from pathlib import Path
+from config import settings
 
 
 def setup_logger(name: str = "tbbox_switcher", level: int = logging.INFO) -> logging.Logger:
@@ -44,4 +45,14 @@ def setup_logger(name: str = "tbbox_switcher", level: int = logging.INFO) -> log
 
 
 # デフォルトロガーインスタンス
-logger = setup_logger()
+# .envのLOG_LEVELを読み込んで設定
+log_level_str = settings.LOG_LEVEL.upper()
+log_level_map = {
+    "DEBUG": logging.DEBUG,
+    "INFO": logging.INFO,
+    "WARNING": logging.WARNING,
+    "ERROR": logging.ERROR,
+    "CRITICAL": logging.CRITICAL
+}
+log_level = log_level_map.get(log_level_str, logging.INFO)
+logger = setup_logger(level=log_level)
